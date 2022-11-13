@@ -1,0 +1,157 @@
+{% load mathfilters %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>movies</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+
+
+
+
+<!-- <h2 onclick="myFunction2()" id="cls-len">Responsive Table1</h2>
+<button onclick="myFunction()">Click me!</button> -->
+<section class="beta">
+    <div class="container">
+        <form action="simple_function" style="float: left; padding: 15px;">
+            <button class="btn btn-primary">Delete DB</button>
+        </form>
+        
+        <form action="todays_movies" style="float: left; padding: 15px;">
+            <button class="btn btn-primary">Import Today's Movies</button>
+        </form> 
+    </div>
+</section>
+<br>
+<br>
+<br>
+<div class='contentt'>
+    <div class="dpx">
+        <div class='px'>
+        <label>
+            <input id="id_all" type="checkbox" class="option-input checkbox" checked />
+            ALL
+        </label>
+        <label>
+            <input id="id_akcija" attr="genree" type="checkbox" class="option-input checkbox"/>
+            Akcija
+        </label>     
+        <label>
+            <input id="id_kriminalka" attr="genree" type="checkbox" class="option-input checkbox" />
+            Kriminalka
+        </label>
+        <label>
+            <input id="id_komedija" attr="genree" type="checkbox" class="option-input checkbox" />
+            Komedija
+        </label>
+        <label>
+            <input id="id_rkomedija" attr="genree" type="checkbox" class="option-input checkbox" />
+            Rom. komedija
+        </label>
+        <label>
+            <input id="id_drama" attr="genree" type="checkbox" class="option-input checkbox" />
+            Drama
+        </label>
+        <label>
+            <input id="id_triler" attr="genree" type="checkbox" class="option-input checkbox" />
+            Triler
+        </label>
+        <label>
+            <input id="id_biografija" attr="genree" type="checkbox" class="option-input checkbox" />
+            Biografija
+        </label>
+        <label>
+            <input id="id_grozljivka" attr="genree" type="checkbox" class="option-input checkbox" />
+            Grozljivka
+        </label>
+        <label>
+            <input id="id_zf" attr="genree" type="checkbox" class="option-input checkbox" />
+            ZF
+        </label>
+        <label>
+            <input id="id_pustolovscina" attr="genree" type="checkbox" class="option-input checkbox" />
+            Pustolovščina
+        </label>
+        <label>
+            <input id="id_romantcni" attr="genree" type="checkbox" class="option-input checkbox" />
+            Romantični
+        </label>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- <p>Some Text</p>
+
+   <div id="my-truncc">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam justo nibh,
+      cursus ut semper a, faucibus nec magna. Nulla pharetra ultricies pulvinar.
+    </div> -->
+
+
+<div id="id_tbody" class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th id="id_date" style="text-align: left; padding: 15px;" class="header__item">Datum</th>
+            <th id="id_time" style="text-align: center;" class="header__item">Čas</th>
+            <th id="id_channel" style="text-align: left; padding: 15px;" class="header__item">Kanal</th>
+            <th id="id_title" style="text-align: left; padding: 15px;" class="header__item">Naslov</th>
+            <th id="id_original_title" style="text-align: left; padding: 15px;" class="header__item">Originalni naslov</th>
+            <th id="id_genree" style="text-align: center; padding: 15px;" class="header__item">Žanr</th>
+            <th id="id_imdb" class="header__item">imDB</th>
+            <th id="id_cast" style="text-align: left; padding: 15px;" class="header__item">Igrajo</th>
+            <th id="id_plot" style="text-align: left; padding: 15px;" class="header__item">Vsebina</th>
+            <th id="id_duration" style="text-align: center; padding: 15px;" class="header__item">Dolžina</th>
+            <th id="id_director" style="text-align: left; padding: 15px;" class="header__item">Direktor</th>
+
+        </tr>
+        </thead>
+        <tbody class="table-content">
+            
+        {% for movie in movies reversed %}
+        <tr class="table-row">
+            <!-- DATUM -->
+            <td style="text-align: left; max-width: 30px; padding: 15px;" class="table-data plot">{{movie.my_date}}</td>
+            <!-- ČAS -->
+            <td style="text-align: center; max-width: 80px; font-size: 16px; font-weight: bold;" class="table-data plot">{{movie.my_movie_time}}</td>
+            <!-- KANAL -->
+            <td style="color:rgb(25, 18, 140); font-size: 16px; text-align: left; max-width: 80px; font-weight: bold; padding: 15px;" class="table-data plot">{{movie.my_channel_link | title}}</td>
+            <!-- NASLOV -->
+            <td style="text-align: left; max-width: 80px; font-size: 10px;" class="table-data">{{movie.title | title}}</td>
+            <!-- ORIGINALNI NASLOV -->
+            <td style="text-align: left; max-width: 120px; font-weight: bolder; color:rgb(42, 42, 136); font-size: 16px" class="table-data">{{movie.my_original_title | title}}</td>
+            <!-- ŽARN -->
+            <td style="text-align: center; max-width: 55px; font-size:10px" class="table-data"><em>{{movie.my_movie_genree}}</em></td>
+            <!-- IMDB -->
+            <td style="max-width: 10px; font-weight: bolder; color:forestgreen; font-size: 18px;" class="table-data">{{movie.my_imdb_rate}}</td>
+            <!-- IGRAJO -->
+            <td style="text-align: left; margin: 0 auto; max-width: 100px; padding: 12px; font-size: 8px; font-weight: bold;" id="my_idd{{movie.id}}" class="table-data class-actors" attr="{{movie.my_article_cast}}">{{movie.my_article_cast|truncatechars:50}}</td>
+            <!-- VSEBINA -->
+            <td style="text-align: left; margin: 0 auto; max-width: 150px; padding: 12px; font-size: 8px" id="my_id{{movie.id}}" attr="{{movie.my_article_plot_main}} ------------------------------------------------- {{movie.my_article_plot_2}} -------------------------------------- {{movie.my_article_plot_3}}" class="table-data class-plot">{{movie.my_article_plot_main|truncatechars:90}}</td>
+            <!-- DOLŽINA -->
+            {% with answer=movie.my_article_duration %}
+            <td class="table-data"><strong>{{answer|intdiv:60}}</strong>h <strong>{{answer|mod:60}}</strong>min</td>
+            {% endwith %}
+            <!-- DIREKTOR -->
+            <td style="text-align: left; max-width: 40px;"  class="table-data">{{movie.my_article_director}}</td>
+        </tr>
+        {% endfor %}
+
+        <tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="{% static 'jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js.js' %}"></script>
+<script type="text/javascript" src="{% static 'js.js1' %}"></script>
+
+</body>
+</html>
